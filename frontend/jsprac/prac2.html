@@ -7,7 +7,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
         fetch("http://spartacodingclub.shop/sparta_api/seoulair").then(res => res.json()).then(data => {
-            console.log(data) /* API를 가져와 JSON형태도 만들어 활용하겠다. */
+            let rows = data['RealtimeCityAir']['row']
+            rows.forEach(element => {
+                console.log(element['MSRSTE_NM'], element['IDEX_MVL'])
+            });
         })
     </script>
 </head>
