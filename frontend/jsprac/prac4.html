@@ -22,13 +22,17 @@
             padding: 10px;
             border: 1px solid;
         }
+
+        .red {
+            color: red;
+        }
     </style>
 
     <script>
         function q1() {
             fetch("http://spartacodingclub.shop/sparta_api/seoulbike").then(res => res.json()).then(data => {
                 let rows = data['getStationList']['row']
-                
+
                 $('#names-q1').empty()
 
                 rows.forEach(element => {
@@ -38,11 +42,21 @@
 
                     // console.log(name, rack, bike)
 
-                    let temp_html = `<tr>
-                                        <td>${name}</td>
-                                        <td>${rack}</td>
-                                        <td>${bike}</td>
-                                    </tr>`
+                    let temp_html = ``
+
+                    if (bike < 5) {
+                        temp_html = `<tr class="red">
+                                            <td>${name}</td>
+                                            <td>${rack}</td>
+                                            <td>${bike}</td>
+                                        </tr>`
+                    } else {
+                        temp_html = `<tr>
+                                            <td>${name}</td>
+                                            <td>${rack}</td>
+                                            <td>${bike}</td>
+                                        </tr>`
+                    }
 
                     $('#names-q1').append(temp_html)
 
