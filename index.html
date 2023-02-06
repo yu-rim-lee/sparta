@@ -24,17 +24,42 @@
     <!-- 자바스크립트 -->
     <script>
         $(document).ready(function () { /* 새로고침 시, 자동 실행 */
+            /* 현재 서울의 날씨 */
             fetch("http://spartacodingclub.shop/sparta_api/weather/seoul").then(res => res.json()).then(data => {
-                // 방법 1
-                // $('#temp').empty()
-                // let number = data['temp']
-                // let temp_html = ``
-                // temp_html = `${number}`
-                // $('#temp').append(number)
-
-                // 방법 2 (답안)
                 let number = data['temp']
                 $('#temp').text(number)
+            })
+
+            /* 영화 리뷰 */
+            fetch("http://spartacodingclub.shop/web/api/movie").then(res => res.json()).then(data => {
+                let rows = data['movies']
+
+                $('#cards').empty()
+
+                rows.forEach(a => {
+                    let title = a['title']
+                    let desc = a['desc']
+                    let comment = a['comment']
+                    let star = a['star']
+                    let image = a['image']
+
+                    /* star번 반복해서 문자열 ⭐을 찍는다. */
+                    let star_image = '⭐'.repeat(star)
+
+                    let temp_html = `<div class="col">
+                                        <div class="card">
+                                            <img src="${image}"
+                                                class="card-img-top" alt="...">
+                                            <div class="card-body">
+                                                <h5 class="card-title">${title}</h5>
+                                                <p class="card-text">${desc}</p>
+                                                <p>${star_image}</p>
+                                                <p class="mycomment">${comment}</p>
+                                            </div>
+                                        </div>
+                                    </div>`
+                    $('#cards').append(temp_html)
+                });
             })
         })
     </script>
@@ -73,7 +98,7 @@
         </div>
     </div>
     <div class="mycards">
-        <div class="row row-cols-1 row-cols-md-4 g-4">
+        <div id="cards" class="row row-cols-1 row-cols-md-4 g-4">
             <div class="col">
                 <div class="card">
                     <img src="https://movie-phinf.pstatic.net/20210728_221/1627440327667GyoYj_JPEG/movie_image.jpg"
