@@ -16,6 +16,7 @@ soup = BeautifulSoup(data.text, 'html.parser')
 
 
 trs = soup.select('#old_content > table > tbody > tr') # 영화 리스트 공통 부분
+
 for tr in trs:
     #old_content > table > tbody > tr:nth-child(3) > td.title > div > a
     a = tr.select_one('td.title > div > a') # 영화 제목
@@ -33,7 +34,8 @@ for tr in trs:
         star = tr.select_one('td.point').text # 영화 평점
         # print(star)
 
-        # print(rank, title, star)
-
+        print(rank, title, star)
+        '''
         doc = {'title':title, 'rank':rank, 'star':star}
         db.movies.insert_one(doc)
+        '''
