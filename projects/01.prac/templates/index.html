@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,13 +8,17 @@
     <title>Document</title>
 
     <script>
-        function hey(){
-            alert('안녕!')
+        function hey() {
+            fetch("/test").then(res => res.json()).then(data => { // '/test'라 하는 url에다 요청을 하고 데이터를 받아 console에 찍는다
+                console.log(data)
+            })
         }
     </script>
 </head>
+
 <body>
     <h1>제목을 입력합니다</h1>
     <button onclick="hey()">나는 버튼!</button>
 </body>
+
 </html>
